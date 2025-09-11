@@ -10,7 +10,7 @@ function NavBar(){
         <nav className="bg-gray-800 text-white p-4 flex items-center justify-between shadow-md">
 
             <div className="text-2xl font-bold">
-                <Link to="/" className="hover:text-gray-300">PuroHentai</Link>
+                <Link to="/" className="hover:text-gray-300">Projeto</Link>
             </div>
             
             <div className="flex items-center">
