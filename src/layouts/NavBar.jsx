@@ -1,11 +1,7 @@
 //Hooks
 import { Link } from "react-router-dom"
-// import { useContext } from "react"
-// import { LoginContext } from "../context/LoginContext"
 
 function NavBar(){
-    // const {user, Logout} = useContext(LoginContext)
-
     return(
         <nav className="bg-gray-800 text-white p-4 flex items-center justify-between shadow-md">
 
@@ -28,23 +24,6 @@ function NavBar(){
                         </li>
                     </ul>
                 </div>
-
-            
-                {/* {user 
-                ? 
-                    <div className="flex items-center">
-                        <div className="mr-2 hover:cursor-pointer" onClick={Logout}>
-                            <img width="25" height="25" src="https://img.icons8.com/parakeet-line/48/FFFFFF/logout-rounded.png" alt="logout-rounded"/> 
-                        </div>
-                        <div className="">
-                            <Link href="/conta">
-                                <img src={user.photo} alt="" width="40px"/>  
-                            </Link>
-                        </div>
-                    </div> 
-                : 
-                <Link href="/conta/login" className="bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded text-white font-semibold">Login</Link>
-                } */}
             </div>
             
 
