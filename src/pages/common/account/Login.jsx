@@ -53,7 +53,7 @@ function Login(){
             setMessageSuccess(data.message)
             
             setTimeout(() => {
-                navigate("/")
+                navigate(-1)
             }, 3000)
         })
         .catch((error) => {

@@ -19,9 +19,7 @@ function HomeWorks(){
     // Visibilidade do formuluário de adição e da confirmação de excluir item
     const [visibilityAlertOptions, setVisibilityAlertOptions] = useState(false)
     const [idToDelete, setIdToDelete] = useState("")
-    
-    // const [tagsFromDB, setTagsFromDB] = useState([])
-    // const [tagsVisibility, setTagsVisibility] = useState(false)
+
     const [messageSuccess, setMessageSuccess] = useState("")
     const [messageError, setMessageError] = useState("")
 
@@ -68,44 +66,6 @@ function HomeWorks(){
     function ShowConfirmationToDelete(){
         setVisibilityAlertOptions(!visibilityAlertOptions)
     }
-
-    // function TagsFormVisibility(){
-    //     setTagsVisibility(!tagsVisibility)
-
-    //     if(!tagsVisibility){
-    //         fetch((`${link}/obras/criar`), {
-    //                 method:"get",
-    //                 credentials: "include",
-    //                 headers: {"Content-Type":"application/json"},
-    //             })
-    //             .then((res)=>{
-    //                 return res.json()
-    //             })
-    //             .then((data) => {
-    //                 setTagsFromDB(data.tags)
-    //             })
-    //             .catch((error) => {
-    //                 setMessageError(error.message)
-    //                 setTimeout(() => {
-    //                     setMessageError("")
-    //             }, 3000)
-    //         })
-    //     }
-        
-    // }
-
-    // function SetSelectedTagsOnForm(e, tagId){
-    //     e.preventDefault()
-
-    //     setTags(prevTags => {
-    //         if(prevTags.includes(tagId)){
-    //             return prevTags.filter(id => id !== tagId)
-    //         }else{
-    //             return [...prevTags, tagId]
-    //         }
-    //     })
-
-    // }
 
     if(loading){
         return <Loading/>
