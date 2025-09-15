@@ -66,7 +66,7 @@ function MostViewedWorks(){
                                             <Link to={`/obra/${work.slug}`}>
                                                 <h3 className="text-xl font-bold">{work.title}</h3>
                                             </Link>
-                                            <p className="text-sm">{work.sinopse}</p>
+                                            <p className="text-sm">{work.synopsis}</p>
                                         </div>
 
                                     </div>

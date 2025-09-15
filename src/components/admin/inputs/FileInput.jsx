@@ -1,13 +1,13 @@
-function FileInput({id, name, onChange, fileSelect}){
+function FileInput({id, name, onChange, fileSelect, multiple=false}){
     
     return(
         <>
             <div className="mt-2">
-                        <label htmlFor="image" className="block font-semibold mb-1">
-                            Imagem
+                        <label htmlFor={name} className="block font-semibold mb-1">
+                            Imagem(ns)
                         </label>
 
-                        <label htmlFor="image" className="flex flex-col items-center px-4 py-6 bg-gray-800 text-blue-600 rounded-lg shadow-lg tracking-wide uppercase border border-blue-600 cursor-pointer hover:bg-blue-600 hover:text-white transition">
+                        <label htmlFor={name} className="flex flex-col items-center px-4 py-6 bg-gray-800 text-blue-600 rounded-lg shadow-lg tracking-wide uppercase border border-blue-600 cursor-pointer hover:bg-blue-600 hover:text-white transition">
                             
                             {fileSelect ? 
                                 <svg className="w-8 h-8 text-green-500" fill="currentColor" viewBox="0 0 20 20">
@@ -27,7 +27,7 @@ function FileInput({id, name, onChange, fileSelect}){
                             <input 
                                 className="hidden"
                                 id={id} 
-                                multiple
+                                multiple={multiple}
                                 name={name} 
                                 onChange={onChange}
                                 placeholder="" 

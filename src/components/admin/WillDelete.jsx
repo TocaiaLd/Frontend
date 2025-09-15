@@ -22,11 +22,11 @@ function WillDelete({isOpen, onClose, dataTypeToDelete, idToDelete, setMessageEr
     .then((res) => res.json())
     .then((data) => {
       if(!data.success){
-        onClose()
         setMessageError(data.message)
+        return onClose()
       }
-      onClose()
       setMessageSuccess(data.message)
+      onClose()
 
     })
     .catch((error) => {

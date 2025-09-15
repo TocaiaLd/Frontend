@@ -17,12 +17,6 @@ function FollowWork({id, setMessageError}){
         .then((data) => {
             setIsFollowed(data.follow)
         })
-        .catch((error) => {
-            // navigate(
-            //     "/pagina-de-erro",
-            //     {state: {message: error.message}}
-            // )
-        }) 
     }, [])
     
     function FollowWork(e){
@@ -36,10 +30,7 @@ function FollowWork({id, setMessageError}){
         .then((res) => res.json())
         .then((data) => {
             if(!data.success){
-                setMessageError(data.message)
-                return setTimeout(() => {
-                    setMessageError("")   
-                }, 5000)
+                return setMessageError(data.message)
             }
             setIsFollowed(data.follow)
         })

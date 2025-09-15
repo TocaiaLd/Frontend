@@ -1,9 +1,12 @@
+//
+import { Link } from "react-router-dom"
+
 //Componenetes
 import EditButton from "./buttons/EditButton"
 import DeleteButton from "./buttons/DeleteButton"
 
 
-function ItemFromDb({itemTitle, onClick}){
+function ItemFromDb({itemTitle, onClick, idToEdit}){
     
     return(
         <ul className="space-y-3 mb-6">
@@ -14,7 +17,9 @@ function ItemFromDb({itemTitle, onClick}){
                 </span>
                 
                 <div className="flex gap-2">
-                    <EditButton/>
+                    <Link to={`editar/${idToEdit}`}>
+                        <EditButton/>
+                    </Link>
                     <DeleteButton onClick={onClick}/>
                 </div>
 

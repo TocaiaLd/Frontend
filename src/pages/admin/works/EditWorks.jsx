@@ -8,17 +8,44 @@ import TagsForWorks from "../../../components/admin/TagsForWorks"
 
 // Hooks
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 //utilidades
 import linkBackend from "../../../utilities/linkBackend"
 
-function AddWorks(){
-    
+function EditWork(){
+    const {id} = useParams()
+
     const navigate = useNavigate()
     
     const [messageError, setMessageError] = useState("")
-    const [inputs, setInputs] = useState({})
+    const [inputs, setInputs] = useState({
+        image: "",  
+        title: "", 
+        synopsis: "", 
+        author: "",  
+        artist: "",  
+        tags: {}, 
+    })
+
+    useEffect(() => {
+        fetch(`${linkBackend}/painel-administrativo/obras/pegar-dados/${id}`, {
+            method: "get",
+            credentials: "include",
+        })
+        .then((res)=>{
+            return res.json()
+        })
+        .then((data) => {
+            if(!data.success){
+                return setMessageError(data.message)
+            }
+            setInputs(data.work)
+        })
+        .catch((error) => {
+            setMessageError(error.message)
+        })
+    }, [])
 
     const handleChange = (e) => {
         const name = e.target.name
@@ -63,7 +90,6 @@ function AddWorks(){
         }
     }
 
-
     // Enviar os dados setados e cadastrar obra 
     function SubmitForm(e){
         e.preventDefault()
@@ -88,7 +114,7 @@ function AddWorks(){
             
         }
 
-        fetch(`${linkBackend}/painel-administrativo/obras/criar`, {
+        fetch(`${linkBackend}/painel-administrativo/obras/editar/${id}`, {
             method: "post",
             credentials: "include",
             body: formData
@@ -120,7 +146,7 @@ function AddWorks(){
                         <label htmlFor="title" className="block font-semibold mb-1">
                             Título
                         </label>
-                        <TextInput id="title" placeholder="Nome da obra" onChange={handleChange} name="title" value={inputs.title}/>
+                        <TextInput id="title" placeholder="Nome da obra" onChange={handleChange} name="title" value={inputs.title} disabled={true}/>
 
                     </div>
 
@@ -154,7 +180,7 @@ function AddWorks(){
                         <TextInput id="artist" placeholder="Nome do artista" onChange={handleChange} name="artist" value={inputs.artist}/>
                     </div>
 
-                    <TagsForWorks handleChange={handleChange}/>
+                    <TagsForWorks handleChange={handleChange} selectedTags={inputs.tags}/>
 
                     <FileInput id="image" name="image" onChange={handleChange} fileSelect={inputs.image ? true : false}/>
                 
@@ -168,4 +194,4 @@ function AddWorks(){
     )
 }
 
-export default AddWorks
+export default EditWork

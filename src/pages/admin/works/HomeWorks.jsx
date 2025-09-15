@@ -10,10 +10,7 @@ import Loading from "../../../layouts/Loading"
 // Hooks
 import { useState } from "react"
 import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-
-//utilidades
-import linkBackend from "../../../utilities/linkBackend"
+import { useLocation } from "react-router-dom"
 
 function HomeWorks(){
     // Visibilidade do formuluário de adição e da confirmação de excluir item
@@ -23,63 +20,29 @@ function HomeWorks(){
     const [messageSuccess, setMessageSuccess] = useState("")
     const [messageError, setMessageError] = useState("")
 
-    // Html de carregando página
-    const [loading, setLoading] = useState(true)
-    
-    // Redirecionamento de páginas
-    const navigate = useNavigate()
+    const location = useLocation()
+    const {message} = location.state || {}
 
     useEffect(() => {
-        fetch(`${linkBackend}/painel-administrativo/checar-administrador`, {
-            method: "get",
-            headers: {"Content-Type":"application/json"},
-            credentials: "include",
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            if(data.auth == false){
-                return navigate(
-                    "/login",
-                    {state: {message: "Essa página requer login para ser acessada."}}
-                )
-            }
-            
-            if(!data.isAdmin){
-                return navigate(
-                    "/página-de-erro",
-                    {state: {message: "Acesso negado. Você não tem acesso a essa rota."}}
-                )
-            }
-
-            setLoading(false)
-
-        }).catch((error) => {
-            navigate(
-                "/pagina-de-erro",
-                {state: {message: error.message}}
-            )
-        })
-
-    }, [])
+        if(message){
+            setMessageSuccess(message)
+        }
+    }, [message])
 
     // Visibilidade da confirmação de excluir o item
     function ShowConfirmationToDelete(){
         setVisibilityAlertOptions(!visibilityAlertOptions)
     }
 
-    if(loading){
-        return <Loading/>
-    }
-
     return(
         <div className="p-6 mt-10 mb-10">
 
             {messageSuccess && (
-                <SuccessMessage message={messageSuccess}/>
+                <SuccessMessage message={messageSuccess} setMessage={setMessageSuccess}/>
             )}
 
             {messageError && (
-                <ErrorMessage message={messageError}/>
+                <ErrorMessage message={messageError} setMessage={setMessageError}/>
             )}
             
             <ListWithSearch 

@@ -1,7 +1,12 @@
 //Hooks
 import { Link } from "react-router-dom"
+import { useContext, useState } from "react"
+import { AccountContext } from "../context/AccountContext"
+import Logout from "../components/common/account/Logout"
 
 function NavBar(){
+    const {account} = useContext(AccountContext)
+
     return(
         <nav className="bg-gray-800 text-white p-4 flex items-center justify-between shadow-md">
 
@@ -19,9 +24,16 @@ function NavBar(){
                         <li className="">
                             <Link to="/obras" className="hover:text-gray-300">Obras</Link>
                         </li>
-                        <li className="">
-                            <Link to="/conta/login" className="hover:text-gray-300">Login</Link>
-                        </li>
+
+                        {account 
+                        ? 
+                            <Logout/>
+                        :
+                            <li className="">
+                                <Link to="/login" className="hover:text-gray-300">Login</Link>
+                            </li>
+                        }
+
                     </ul>
                 </div>
             </div>

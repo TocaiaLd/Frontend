@@ -5,16 +5,17 @@ import SuccessMessage from "../../../components/common/messages/SuccessMessage"
 
 // Hooks
 import { useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useState, useContext } from "react"
 
 // Utilidades
 import linkBackend from "../../../utilities/linkBackend"
-
+import { AccountContext } from "../../../context/AccountContext"
 
 function Login(){
     const navigate = useNavigate()
     const [messageError, setMessageError] = useState("")
     const [messageSuccess, setMessageSuccess] = useState("")
+    const {setAccount} = useContext(AccountContext)
 
     const [inputs, setInputs] = useState({
         email: "",
@@ -44,16 +45,14 @@ function Login(){
         .then((data) => {
             
             if(!data.auth){
-                setMessageError(data.message)
-                return setTimeout(() => {
-                    setMessageError("")
-                }, 5000)
+                return setMessageError(data.message)
             }
 
             setMessageSuccess(data.message)
+            setAccount(data.user)
             
             setTimeout(() => {
-                navigate(-1)
+                navigate("/")
             }, 3000)
         })
         .catch((error) => {
@@ -65,10 +64,10 @@ function Login(){
         <div className="mt-10 mb-10 flex items-center justify-center">
             <div className="bg-gray-800 rounded-2xl p-6 max-w-md w-full shadow-lg">
                 {messageError && (
-                    <ErrorMessage message={messageError}/>
+                    <ErrorMessage message={messageError} setMessage={setMessageError}/>
                 )}
                 {messageSuccess && (
-                    <SuccessMessage message={messageSuccess}/>
+                    <SuccessMessage message={messageSuccess} setMessage={setMessageSuccess}/>
                 )}
                 
                 <h1 className="text-2xl font-bold mb-6">

@@ -37,7 +37,7 @@ function WorkCardInfo({work, setMessageError}){
                     <div className="pt-4">
                         <h2 className="text-xl font-semibold mb-2">Sinopse</h2>
                         <p className="text-gray-50 leading-relaxed">
-                        {work.sinopse}
+                        {work.synopsis}
                         </p>
                     </div>
 

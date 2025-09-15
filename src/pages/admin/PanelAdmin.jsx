@@ -1,56 +1,11 @@
 // Hooks
-import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 // Componentes
 import OptionCard from "../../components/admin/OptionCard"
 
-//Layouts
-import Loading from "../../layouts/Loading"
-
-//Utilidadades
-import linkBackend from "../../utilities/linkBackend"
-
 function PanelAdmin(){
-    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
-
-    useEffect(() => {
-        fetch(`${linkBackend}/painel-administrativo/checar-administrador`, {
-            method: "get",
-            headers: {"Content-Type":"application/json"},
-            credentials: "include",
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            if(data.auth == false){
-                return navigate(
-                    "/login",
-                    {state: {message: "Essa página requer login para ser acessada."}}
-                )
-            }
-            
-            if(!data.isAdmin){
-                return navigate(
-                    "/página-de-erro",
-                    {state: {message: "Acesso negado. Você não tem acesso a essa rota."}}
-                )
-            }
-
-            setLoading(false)
-
-        }).catch((error) => {
-            navigate(
-                "/pagina-de-erro",
-                {state: {message: error.message}}
-            )
-        })
-
-    }, [])
-    
-    if(loading){
-        return <Loading/>
-    }
 
     return(
         <>

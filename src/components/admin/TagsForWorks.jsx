@@ -3,8 +3,9 @@ import { useEffect, useState } from "react"
 
 //utilidades
 import linkBackend from "../../utilities/linkBackend"
+import HasTagButton from "../../components/admin/buttons/HasTagButton"
 
-function TagsForWorks({handleChange}){
+function TagsForWorks({handleChange, selectedTags}){
     const [tagsFromDB, setTagsFromDB] = useState([])
     const [tagsVisibility, setTagsVisibility] = useState(false)
 
@@ -53,24 +54,24 @@ function TagsForWorks({handleChange}){
                                     name={tag.slug}
                                     value={tag._id}
                                     />
-                                
-                                    <div 
-                                    className="border border-gray-400 px-4 py-1 rounded-4xl text-white peer-checked:bg-green-600">
-                                        {tag.title}
-                                    </div>
+
+                                    
+                                    {selectedTags && selectedTags.includes(tag._id)
+
+                                    ?
+                                        <HasTagButton has={true}>
+                                            {tag.title}
+                                        </HasTagButton>
+                                        
+                                    :
+                                        <HasTagButton has={false}>
+                                            {tag.title}
+                                        </HasTagButton>
+                                    }
 
                                     
                                 </label>
                             ))}
-                            {/* {tagsFromDB.map((tag) => (
-                                <span 
-                                key={tag._id}
-                                className={tags.includes(tag._id) ? "tag cursor-pointer bg-green-600 text-white px-3 py-1 rounded-full text-sm" : "tag cursor-pointer bg-red-600 px-3 py-1 rounded-full text-sm"} 
-                                onClick={(e) => SetSelectedTagsOnForm(e, tag._id)}
-                                >
-                                    {tag.title}
-                                </span>
-                            ))} */}
                         
                     </div>
 

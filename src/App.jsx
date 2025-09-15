@@ -1,11 +1,22 @@
 // Hooks usados
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 
+//
+import ProtectRoute from "./components/admin/ProtectRoute"
+
 // Páginas
 import PanelAdmin from "./pages/admin/PanelAdmin"
   import HomeTags from "./pages/admin/tags/HomeTags"
   import AddTags from "./pages/admin/tags/AddTags"
+  import EditTags from "./pages/admin/tags/EditTags"
+
   import HomeWorks from "./pages/admin/works/HomeWorks"
+  import AddWorks from "./pages/admin/works/AddWorks"
+  import EditWork from "./pages/admin/works/EditWorks"
+
+  import AddChapters from "./pages/admin/chapters/AddChapters"
+  import HomeChapters from "./pages/admin/chapters/HomeChapters"
+  import EditChapters from "./pages/admin/chapters/EditChapters"
 
 import Login from "./pages/common/account/Login"
 import Home from "./pages/common/Home"
@@ -15,7 +26,6 @@ import Work from "./pages/common/Work"
 import Footer from "./layouts/Footer"
 import NavBar from "./layouts/NavBar"
 import Sign from "./pages/common/account/Sign"
-import AddWorks from "./pages/admin/works/AddWorks"
 
 function App() {
 
@@ -28,15 +38,19 @@ function App() {
         <Route path="/" element={<Home/>}/>
 
         {/* Painel administrativo */}
-        <Route path="/painel-administrativo" element={<PanelAdmin/>}/>
-          <Route path="/painel-administrativo/tags" element={<HomeTags/>}/>
-            <Route path="/painel-administrativo/tags/adicionar" element={<AddTags/>}/>
+        <Route path="/painel-administrativo" element={<ProtectRoute> <PanelAdmin/> </ProtectRoute>}/>
+          <Route path="/painel-administrativo/tags" element={<ProtectRoute> <HomeTags/> </ProtectRoute>}/>
+          <Route path="/painel-administrativo/tags/adicionar" element={<ProtectRoute> <AddTags/> </ProtectRoute>}/>
+          <Route path="/painel-administrativo/tags/editar/:id" element={<ProtectRoute> <EditTags/> </ProtectRoute>}/>
 
-          <Route path="/painel-administrativo/obras" element={<HomeWorks/>}/>
-            <Route path="/painel-administrativo/obras/adicionar" element={<AddWorks/>}/>
 
-          <Route path="/painel-administrativo/capitulos"/>
-            <Route path="/painel-administrativo/capitulos/adicionar"/>
+          <Route path="/painel-administrativo/obras" element={<ProtectRoute> <HomeWorks/> </ProtectRoute>}/>
+          <Route path="/painel-administrativo/obras/adicionar" element={<ProtectRoute> <AddWorks/> </ProtectRoute>}/>
+          <Route path="/painel-administrativo/obras/editar/:id" element={<ProtectRoute> <EditWork/> </ProtectRoute>}/>
+
+          <Route path="/painel-administrativo/capitulos" element={<ProtectRoute> <HomeChapters/> </ProtectRoute>}/>
+          <Route path="/painel-administrativo/capitulos/adicionar" element={<ProtectRoute> <AddChapters/> </ProtectRoute>}/>
+          <Route path="/painel-administrativo/capitulos/editar/:id" element={<ProtectRoute> <EditChapters/> </ProtectRoute>}/>
         
         {/* Obra */}
         <Route path="/obra/:slug" element={<Work/>}/>

@@ -32,10 +32,8 @@ function Work(){
                     {state: {message: error.message}}
                 )
             }
-            
             setLoading(false)
             setWork(data.work)
-            
         })
         .catch((error) => {
             navigate(
@@ -54,7 +52,7 @@ function Work(){
         <main className="max-w-6xl mx-auto px-4 py-8 mb-10">
             
             {messageError && (
-                <ErrorMessage message={messageError}/>
+                <ErrorMessage message={messageError} setMessage={setMessageError}/>
             )}
 
             {/* <!-- Topo: Capa e Infos --> */}

@@ -4,19 +4,43 @@ import SubmitButton from "../../../components/admin/buttons/SubmitButton"
 import ErrorMessage from "../../../components/common/messages/ErrorMessage"
 
 // Hooks
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+
 
 //utilidades
 import linkBackend from "../../../utilities/linkBackend"
 
-function AddTags(){
+function EditTags(){
     const [tagTitle, setTagTittle] = useState("")
     const [slug, setSlug] = useState("")
 
     const [messageError, setMessageError] = useState(null)
 
     const navigate = useNavigate()
+    const {id} = useParams()
+
+    useEffect(() => {
+        fetch(`${linkBackend}/painel-administrativo/tags/pegar-dados/${id}`, {
+            method: "get",
+            credentials: "include",
+            headers: {"Content-Type":"application/json"},
+
+        }).then((res)=> res.json())
+        .then((data) => {            
+            if(!data.success){
+                return setMessageError(data.message)
+            }
+            const tag = data.data
+
+            setTagTittle(tag.title)
+
+        })
+        .catch((error) => {
+            navigate("/pagina-de-erro", {state: {message: error.message}})
+        })
+
+    }, [])
 
     const handleChange = (e) => {
         let tagTitle = e.target.value
@@ -30,7 +54,7 @@ function AddTags(){
     function SubmitForm(e){
         e.preventDefault()
         
-        fetch(`${linkBackend}/painel-administrativo/tags/adicionar`, {
+        fetch(`${linkBackend}/painel-administrativo/tags/editar/${id}`, {
             method: "post",
             credentials: "include",
             headers: {"Content-Type":"application/json"},
@@ -58,7 +82,7 @@ function AddTags(){
                 {messageError && (<ErrorMessage message={messageError}/>)}
                 
                 <form onSubmit={SubmitForm}>
-                    <h2 className="text-xl font-bold mb-4">Adicionar Nova Tag</h2>
+                    <h2 className="text-xl font-bold mb-4">Editar Tag</h2>
 
                     <label htmlFor="tag" className="block font-semibold mb-1">
                         Nome
@@ -68,7 +92,7 @@ function AddTags(){
                     id="tag"
                     name="tag"
                     value={tagTitle} 
-                    placeholder="digite o nome da tag" 
+                    placeholder="digite o novo nome da tag" 
                     onChange={handleChange}/>
 
                     <SubmitButton/>
@@ -81,4 +105,4 @@ function AddTags(){
     )
 }
 
-export default AddTags
+export default EditTags
