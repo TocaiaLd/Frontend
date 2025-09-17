@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 
 //componenetes e layouts
 import Loading from "../../layouts/Loading"
+import ChangeChapterButton from "../../components/common/buttons/ChangeChapter"
 
 function Chapter(){
     const navigate = useNavigate()
@@ -101,12 +102,14 @@ function Chapter(){
 
                 <div className="w-1/4">
                     <select 
-                    defaultValue={chapter} 
+                    value={chapter} 
                     className="bg-white text-black border w-full border-gray-400 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     onChange={ChangeChapter}
                     >
                         {othersChapters.map((number) => (
-                            <option key={number} value={number} className="border-black">Capítulo {number}</option>
+                            <option key={number} value={number} className="border-black">
+                                Capítulo {number}
+                            </option>
                         ))}
 
                     </select>
@@ -115,14 +118,14 @@ function Chapter(){
                 {/* <!-- Navegação --> */}
                 <div className="flex gap-2">
                     {previousChapter && (
-                        <Link to={`/obra/${slug}/${previousChapter}`} className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-xl text-sm font-medium transition">
-                        Capítulo Anterior
-                        </Link>
+                        <ChangeChapterButton slug={slug} previousChapter={previousChapter}>
+                            Capítulo Anterior
+                        </ChangeChapterButton>
                     )}
                     {nextChapter && (
-                        <Link to={`/obra/${slug}/${nextChapter}`} className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-xl text-sm font-medium transition">
-                        Próximo Capítulo
-                        </Link>
+                        <ChangeChapterButton slug={slug} previousChapter={nextChapter}>
+                            Próximo Capítulo 
+                        </ChangeChapterButton>
                     )}
                 </div>
             </header>
