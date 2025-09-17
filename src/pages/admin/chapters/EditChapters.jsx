@@ -81,8 +81,6 @@ function EditChapters({}){
             }else{
                 formData.append(`${key}`, inputs[key])
             }
-
-            
         }
 
         fetch(`${linkBackend}/painel-administrativo/capitulos/editar/${id}`, {
@@ -112,14 +110,15 @@ function EditChapters({}){
                 <form onSubmit={SubmitForm}>
                     <h2 className="text-xl font-bold mb-4">Editar Capítulo</h2>
 
-                    <label htmlFor="work" className="block font-semibold mb-1">
+                    <label htmlFor="workTitle" className="block font-semibold mb-1">
                         Obra
                     </label>
 
                     <TextInput 
-                        id="work"
-                        name="work"
-                        value={inputs.work ? inputs.work._id : ""} 
+                        id="workTitle"
+                        name="workTitle"
+                        value={inputs.work ? inputs.work.title : ""} 
+                        onChange={handleChange}
                         placeholder="digite o título do capítulo" 
                         disabled={true}
                     />

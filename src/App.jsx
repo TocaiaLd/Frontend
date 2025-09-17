@@ -21,6 +21,7 @@ import PanelAdmin from "./pages/admin/PanelAdmin"
 import Login from "./pages/common/account/Login"
 import Home from "./pages/common/Home"
 import Work from "./pages/common/Work"
+import Chapter from "./pages/common/Chapter"
 
 // Layouts
 import Footer from "./layouts/Footer"
@@ -54,6 +55,8 @@ function App() {
         
         {/* Obra */}
         <Route path="/obra/:slug" element={<Work/>}/>
+        <Route path="/obra/:slug/:chapter" element={<Chapter/>}/>
+        
 
         {/* Conta */}
         <Route path="/login" element={<Login/>}/>
