@@ -2,11 +2,10 @@
 import { useNavigate } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
 
 //componenetes e layouts
 import Loading from "../../layouts/Loading"
-import ChangeChapterButton from "../../components/common/buttons/ChangeChapter"
+import PrevOrNextChapterButton from "../../components/common/buttons/PrevOrNextChapterButton"
 
 function Chapter(){
     const navigate = useNavigate()
@@ -95,15 +94,16 @@ function Chapter(){
         
         <main className="max-w-4xl mx-auto px-4 py-6">
             {/* <!-- Cabeçalho --> */}
-            <header className="flex flex-col sm:flex-row items-center justify-between gap-2 mb-6">
-                <h1 className="text-xl sm:text-2xl font-semibold text-center sm:text-left">
-                    Capítulo {cap.chapterNumber} - {cap.work.title}
-                </h1>
-
-                <div className="w-1/4">
+            <h1 className="text-xl sm:text-2xl font-semibold text-center sm:text-left mb-3">
+                {cap.work.title} - Capítulo {cap.chapterNumber} 
+            </h1>
+            
+            <div className="flex flex-row items-center justify-between gap-2 mb-6">
+                
+                <div className="w-8/12">
                     <select 
                     value={chapter} 
-                    className="bg-white text-black border w-full border-gray-400 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="bg-gray-800 border w-full border-none px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl"
                     onChange={ChangeChapter}
                     >
                         {othersChapters.map((number) => (
@@ -116,19 +116,9 @@ function Chapter(){
                 </div>
 
                 {/* <!-- Navegação --> */}
-                <div className="flex gap-2">
-                    {previousChapter && (
-                        <ChangeChapterButton slug={slug} previousChapter={previousChapter}>
-                            Capítulo Anterior
-                        </ChangeChapterButton>
-                    )}
-                    {nextChapter && (
-                        <ChangeChapterButton slug={slug} previousChapter={nextChapter}>
-                            Próximo Capítulo 
-                        </ChangeChapterButton>
-                    )}
-                </div>
-            </header>
+                <PrevOrNextChapterButton slug={slug} previousChapter={previousChapter} nextChapter={nextChapter}/>
+
+            </div>
 
             {/* <!-- Imagens das páginas --> */}
             <div className="space-y-6">
@@ -138,23 +128,13 @@ function Chapter(){
             </div>
 
             {/* <!-- Aviso de fim --> */}
-            <div className="mt-10 text-center text-gray-500 text-sm">
+            <h1 className="mt-10 mb-10 text-center text-gray-500 text-xl sm:text-2xl">
                 Você chegou ao final do capítulo.
-            </div>
+            </h1>
 
-            {/* <!-- Navegação novamente no fim -->
-            <div className="flex justify-center gap-3 mt-6">
-                {previousChapter && (
-                    <Link to={`/obra/${slug}/${previousChapter}`} className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-xl text-sm font-medium transition">
-                        Capítulo Anterior
-                    </Link>
-                )}
-                {nextChapter && (
-                    <Link to={`/obra/${slug}/${nextChapter}`} className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-xl text-sm font-medium transition">
-                        Próximo Capítulo
-                    </Link>
-                )}
-            </div> */}
+            <PrevOrNextChapterButton slug={slug} previousChapter={previousChapter} nextChapter={nextChapter}/>
+            
+            
         </main>
 
         

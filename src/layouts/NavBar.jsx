@@ -22,7 +22,7 @@ function NavBar(){
                             <Link to="/pesquisar" className="hover:text-gray-300">Pesquisar</Link>
                         </li>
                         <li className="">
-                            <Link to="/obras" className="hover:text-gray-300">Obras</Link>
+                            <Link to="/tags" className="hover:text-gray-300">Tags</Link>
                         </li>
 
                         {account 

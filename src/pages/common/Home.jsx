@@ -6,13 +6,11 @@ function Home(){
 
     return(
         <>
-
             {/* mais vistos */}
             <MostViewedWorks/>
 
             {/* Últimos lançados */}
-            <ListOfWorks/>
-
+            <ListOfWorks linkSearch={"recentes"} page={1} title={`Últimos Lançamentos`}/>
         </>
     )
 }

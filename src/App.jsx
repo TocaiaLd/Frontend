@@ -18,15 +18,22 @@ import PanelAdmin from "./pages/admin/PanelAdmin"
   import HomeChapters from "./pages/admin/chapters/HomeChapters"
   import EditChapters from "./pages/admin/chapters/EditChapters"
 
-import Login from "./pages/common/account/Login"
+
+import Account from "./pages/common/account/Account"
+  import Login from "./pages/common/account/Login"
+  import Sign from "./pages/common/account/Sign"
+
 import Home from "./pages/common/Home"
-import Work from "./pages/common/Work"
-import Chapter from "./pages/common/Chapter"
+  import MostRecents from "./pages/common/MostRecentes"
+  import Work from "./pages/common/Work"
+  import Chapter from "./pages/common/Chapter"
+
+import FindByTag from "./pages/common/FindByTag"
+import TagsSelected from "./pages/common/TagSelected"
 
 // Layouts
 import Footer from "./layouts/Footer"
 import NavBar from "./layouts/NavBar"
-import Sign from "./pages/common/account/Sign"
 
 function App() {
 
@@ -37,6 +44,7 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Home/>}/>
+        <Route path="/recentes/:page" element={<MostRecents/>}/>
 
         {/* Painel administrativo */}
         <Route path="/painel-administrativo" element={<ProtectRoute> <PanelAdmin/> </ProtectRoute>}/>
@@ -57,10 +65,14 @@ function App() {
         <Route path="/obra/:slug" element={<Work/>}/>
         <Route path="/obra/:slug/:chapter" element={<Chapter/>}/>
         
-
         {/* Conta */}
+        <Route path="/conta" element={<Account/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/criar" element={<Sign/>}/>
+
+        {/* Tags */}
+        <Route path="/tags" element={<FindByTag/>}/>
+        <Route path="/tags/:slug/:page" element={<TagsSelected/>}/>
 
 
       </Routes>
